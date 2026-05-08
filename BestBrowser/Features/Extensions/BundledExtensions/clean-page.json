@@ -1,0 +1,11 @@
+{
+  "id": "clean-page",
+  "name": "Clean Page",
+  "description": "Remove clutter, popups, and noisy overlays from the current page.",
+  "icon": "wand.and.stars.inverse",
+  "category": "pageTools",
+  "placement": "toolbar",
+  "matchDomains": ["news", "shopping", "substack", "medium.com"],
+  "suggestedDomains": ["news", "shopping", "blogs"],
+  "command": "cleanPage"
+}

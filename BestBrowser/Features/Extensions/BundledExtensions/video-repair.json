@@ -1,0 +1,11 @@
+{
+  "id": "video-repair",
+  "name": "Video Layout Repair",
+  "description": "Force a better playback layout when embedded sites behave badly.",
+  "icon": "rectangle.compress.vertical",
+  "category": "media",
+  "placement": "toolbar",
+  "matchDomains": ["youtube.com", "www.youtube.com"],
+  "suggestedDomains": ["youtube.com"],
+  "command": "repairVideoLayout"
+}

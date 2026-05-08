@@ -1,0 +1,11 @@
+.DS_Store
+
+.build/
+.swiftpm/
+DerivedData/
+
+BestBrowser.app/
+releases/
+
+xcuserdata/
+*.xcuserstate

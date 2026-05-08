@@ -1,0 +1,11 @@
+{
+  "id": "reader-mode",
+  "name": "Reader Focus",
+  "description": "Turn the current page into a clean reading view with one click.",
+  "icon": "book.pages.fill",
+  "category": "pageTools",
+  "placement": "toolbar",
+  "matchDomains": ["*"],
+  "suggestedDomains": ["docs", "blogs", "news"],
+  "command": "openReadingMode"
+}

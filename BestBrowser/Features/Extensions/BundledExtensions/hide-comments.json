@@ -1,0 +1,11 @@
+{
+  "id": "hide-comments",
+  "name": "Hide Comments",
+  "description": "Collapse comment sections and discussion blocks on noisy pages.",
+  "icon": "text.bubble",
+  "category": "pageTools",
+  "placement": "both",
+  "matchDomains": ["youtube.com", "www.youtube.com", "medium.com", "substack.com"],
+  "suggestedDomains": ["youtube.com", "medium.com", "substack.com"],
+  "script": "(function() { let affected = 0; const selectors = ['#comments', 'ytd-comments', '[data-testid=\"comments\"]', '.comments', '#comment', '.comment-thread']; selectors.forEach(sel => { try { document.querySelectorAll(sel).forEach(el => { if (el.style.display !== 'none') { el.style.display = 'none'; affected++; } }); } catch (e) {} }); return affected; })();"
+}

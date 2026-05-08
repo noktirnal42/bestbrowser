@@ -1,0 +1,11 @@
+{
+  "id": "session-brief",
+  "name": "Session Brief",
+  "description": "Generate a quick briefing and save your current research session faster.",
+  "icon": "square.stack.3d.up.badge.a",
+  "category": "productivity",
+  "placement": "library",
+  "matchDomains": ["*"],
+  "suggestedDomains": ["research", "shopping", "docs"],
+  "command": "briefSession"
+}
