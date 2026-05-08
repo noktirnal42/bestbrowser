@@ -1,52 +1,213 @@
 # BestBrowser
 
-Native macOS browser UI built with SwiftUI and WebKit, with privacy tooling and Apple on-device intelligence for reading assistance.
+![BestBrowser Hero](BestBrowser/BrandingAssets/brandmark-hero.png)
 
-## Highlights
+[![Version](https://img.shields.io/badge/version-0.3.0-CB8C58?style=for-the-badge)](VERSION)
+[![Platform](https://img.shields.io/badge/platform-macOS%2015%2B-2B6F73?style=for-the-badge)](docs/DEVELOPMENT.md)
+[![Swift](https://img.shields.io/badge/swift-6-F29D38?style=for-the-badge)](Package.swift)
+[![Status](https://img.shields.io/badge/status-active%20rebuild-E6D1B0?style=for-the-badge)](V3_PLAN.md)
 
-- Native Swift 6 macOS app with WebKit tab browsing
-- Privacy tools for ad cleanup, popup stripping, and tracker blocking
-- Apple Foundation Models integration for summaries, translation, simplification, and smarter suggestions
-- Branded startup flow, generated app icon assets, and a custom new-tab home view
-- Local history, bookmarks, and search indexing backed by GRDB
+**Quiet focus. Your web.**
 
-## Requirements
+BestBrowser is a native macOS browser workspace built with SwiftUI and WebKit for people who keep research, saved sessions, ambient music, background video, and page-native tools open at the same time. It is designed to feel more like a focused desktop workspace than a generic browser with an AI tab glued on later.
 
-- macOS 26+
-- Xcode 16.4+
-- Apple Intelligence enabled on a supported Mac for AI features
+## Why BestBrowser
 
-## Build
+- Native macOS browser shell in SwiftUI and WebKit
+- Workspaces, session restore, tab groups, and split browsing
+- On-device AI features powered by Apple Foundation Models
+- Watchlist and memory surfaces for longer-running research
+- Built-in music and video companion panes
+- Privacy tooling for ad blocking, tracker blocking, and page cleanup
+- In-app extension system for browser-native actions and page tools
+
+## Product Screens
+
+### Browser Workspace
+
+![BestBrowser Browser Workspace](docs/assets/bestbrowser-browser.png)
+
+### Media Companion Experience
+
+![BestBrowser Media Experience](docs/assets/bestbrowser-media.png)
+
+## Core Surfaces
+
+BestBrowser currently ships around seven main surfaces:
+
+- `Browser`: tabbed browsing, split view, inspector, page tools
+- `Workspaces`: saved sessions and grouped browser context
+- `Watchlist`: change monitoring for important pages
+- `Memory`: recalled page context and captured browsing history
+- `Extensions`: bundled and user-provided browser-native tools
+- `Music`: DI.fm, Spotify, and Apple Music companion surface
+- `Video`: YouTube, Twitch, Prime Video, and Max companion surface
+
+## What Makes It Different
+
+### Research First
+
+BestBrowser is strongest when you are keeping multiple kinds of context alive:
+
+- a working set of tabs
+- saved workspace groupings
+- watched pages
+- AI summaries and compare flows
+- a background media stream
+
+### Media Built In
+
+Instead of forcing everything into standard tabs, BestBrowser has dedicated media surfaces and mini players so music and video can stay nearby without taking over your main browsing flow.
+
+### Native macOS Feel
+
+The app is built around:
+
+- SwiftUI
+- WebKit
+- keyboard-driven commands
+- sidebar routing
+- window-aware UI
+- compact desktop-style controls
+
+## Feature Snapshot
+
+### Browser UX
+
+- Session restore and reopen closed tabs
+- Split browsing with pane-aware navigation
+- Vertical tabs and tab grouping
+- Command palette and keyboard shortcuts
+- Reading mode and page cleanup actions
+
+### AI and Context
+
+- On-device reading assistance with Apple Foundation Models
+- Page memory capture and retrieval
+- Tab comparison and summarization
+- Inspector tools and page-native AI actions
+
+### Media
+
+- Persistent music surface and bottom mini player
+- Persistent video surface and floating companion pane
+- Shared media controls across browser tabs, music, and video
+
+### Privacy
+
+- Ad and tracker blocking
+- Popup stripping and page cleanup
+- Site compatibility mode for fragile web apps
+
+## Technology
+
+- Swift 6
+- SwiftUI
+- WebKit
+- Swift Package Manager
+- Apple Foundation Models
+
+## Quick Start
+
+### Build
 
 ```bash
 cd /Users/jeremymcvay/dev/bestbrowser-native
 swift build
 ```
 
-To create the app bundle and DMG:
+### Test
+
+```bash
+cd /Users/jeremymcvay/dev/bestbrowser-native
+swift test
+```
+
+### Package the App and DMG
 
 ```bash
 cd /Users/jeremymcvay/dev/bestbrowser-native
 ./build.sh
+open BestBrowser.app
 ```
 
-## AI Notes
+## Repository Layout
 
-BestBrowser no longer uses external LLM providers. AI features now run through Apple’s `FoundationModels` framework on device.
+```text
+BestBrowser/
+  App/                     App version and launch glue
+  AI/                      Summaries, compare, page memory, tab organization
+  Core/
+    Models/                Core browser models
+    Services/              Auth, commands, media, session, compatibility
+    Stores/                Browser shell, navigation, and scene routing state
+  Features/
+    Browser/               Main browser shell and web views
+    Extensions/            In-app extension system
+    Home/                  Start and dashboard surfaces
+    Media/                 Shared media UI components and persistent players
+    Music/                 Dedicated music surface
+    Sidebar/               Scene-level navigation rail
+    Video/                 Dedicated video surface and floating pane
+  Monitoring/              Watchlist services
+  Privacy/                 Ad/tracker blocking and cleanup tools
+  Search/                  Semantic/local search
+  Services/                Workspace and restore services
+  Storage/                 Persistence layer
+  UI/                      Shared supporting UI
+Tests/
+Scripts/
+docs/
+```
 
-If Apple Intelligence is unavailable, browsing still works, but AI actions will show availability guidance instead of attempting remote calls.
+## Documentation
 
-## Current Areas
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): stores, services, scenes, and WebKit structure
+- [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md): build, test, package, and release workflow
+- [docs/BRANDING.md](docs/BRANDING.md): visual system, voice, and asset pipeline
+- [CONTRIBUTING.md](CONTRIBUTING.md): contribution expectations and workflow
+- [CHANGELOG.md](CHANGELOG.md): release-oriented project history
+- [V3_PLAN.md](V3_PLAN.md): current feature roadmap
+- [VNEXT_REBUILD_PLAN.md](VNEXT_REBUILD_PLAN.md): rebuild/refactor direction
 
-- [BestBrowser/BrowserWindow.swift](/Users/jeremymcvay/dev/bestbrowser-native/BestBrowser/BrowserWindow.swift): main window, tab content, new-tab home
-- [BestBrowser/BrowserViewModel.swift](/Users/jeremymcvay/dev/bestbrowser-native/BestBrowser/BrowserViewModel.swift): tab state, navigation, bookmarks
-- [BestBrowser/UI/SidebarView.swift](/Users/jeremymcvay/dev/bestbrowser-native/BestBrowser/UI/SidebarView.swift): history, bookmarks, search, AI tools
-- [BestBrowser/AIClient.swift](/Users/jeremymcvay/dev/bestbrowser-native/BestBrowser/AIClient.swift): Apple Foundation Models integration
-- [BestBrowser/Branding](/Users/jeremymcvay/dev/bestbrowser-native/BestBrowser/Branding): brand system and app visuals
+## Current Status
 
-## Status
+BestBrowser is in active product-building mode, not “finished browser” mode.
 
-- Privacy and storage foundation are in place
-- Apple Intelligence integration is active
-- New-tab UX, reading mode summary, and AI-aware suggestions are implemented
-- Download manager, favicon work, and deeper browser features still need polish
+Strongest areas today:
+
+- native browser/workspace shell
+- media companion surfaces
+- tab and session organization
+- privacy and page tooling
+- ongoing vNext architecture cleanup
+
+Still rough around the edges:
+
+- provider-specific media quirks
+- site compatibility edge cases
+- UI consistency and polish
+- long-tail browser completeness versus mature browsers
+
+## Branding
+
+The brand system is already embedded in the repository:
+
+- app icon and launch assets: `BestBrowser/Assets.xcassets`
+- generated export assets: `BestBrowser/BrandingAssets`
+- visual tokens and tagline: `BestBrowser/Branding/BrandingManager.swift`
+
+See [docs/BRANDING.md](docs/BRANDING.md) for the full guide.
+
+## Release Output
+
+Running `./build.sh` produces:
+
+- `BestBrowser.app`
+- `releases/BestBrowser-v<version>.dmg`
+
+Versioning is read from [`VERSION`](VERSION).
+
+## License
+
+No license file is included yet. Treat the repository as source-available unless and until a license is added.
