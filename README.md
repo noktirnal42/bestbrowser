@@ -25,7 +25,7 @@ BestBrowser is a native macOS browser workspace built with SwiftUI and WebKit fo
 
 ### Browser Workspace
 
-![BestBrowser Browser Workspace](docs/assets/bestbrowser-browser.png)
+![BestBrowser Browser Workspace](docs/assets/bestbrowser-home.png)
 
 ### Media Companion Experience
 
