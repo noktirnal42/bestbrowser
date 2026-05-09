@@ -171,6 +171,8 @@ docs/
 
 ## Documentation
 
+- [GitHub Pages](https://noktirnal42.github.io/bestbrowser/): public product overview, support, and privacy pages
+- [GitHub Wiki](https://github.com/noktirnal42/bestbrowser/wiki): getting started, architecture, and contributor-facing docs
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): stores, services, scenes, and WebKit structure
 - [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md): build, test, package, and release workflow
 - [docs/BRANDING.md](docs/BRANDING.md): visual system, voice, and asset pipeline

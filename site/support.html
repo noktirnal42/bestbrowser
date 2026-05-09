@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BestBrowser Support</title>
+  <meta name="description" content="Support and troubleshooting for BestBrowser on macOS.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell page-shell-narrow">
+    <header class="subpage-header">
+      <a class="back-link" href="index.html">BestBrowser</a>
+      <p class="eyebrow">Support</p>
+      <h1>Get BestBrowser running cleanly</h1>
+      <p class="lede">Use this page for install, build, and troubleshooting basics. For deeper internals and contributor workflow, use the GitHub wiki and repository docs.</p>
+    </header>
+
+    <section class="section">
+      <div class="two-up">
+        <article class="panel">
+          <h2>Requirements</h2>
+          <ul class="clean-list">
+            <li>macOS 26 or newer</li>
+            <li>Xcode 26.4.1 or newer</li>
+            <li>Swift 6.3+</li>
+            <li>Apple Intelligence enabled on a supported Mac for AI features</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h2>Current Release</h2>
+          <ul class="clean-list">
+            <li><a href="https://github.com/noktirnal42/bestbrowser/releases/download/v0.3.1/BestBrowser-v0.3.1.dmg">Download BestBrowser 0.3.1</a></li>
+            <li><a href="https://github.com/noktirnal42/bestbrowser/releases/tag/v0.3.1">Read the 0.3.1 release notes</a></li>
+            <li><a href="https://github.com/noktirnal42/bestbrowser/issues">Report an issue on GitHub</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Quick local verification</h2>
+      <div class="panel">
+        <pre><code>cd /Users/jeremymcvay/dev/bestbrowser-native
+swift build
+./test.sh
+./build.sh
+open /Users/jeremymcvay/dev/bestbrowser-native/BestBrowser.app</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="two-up">
+        <article class="panel">
+          <h2>Packaging problems</h2>
+          <p>Re-run the full packaging path from the repo root:</p>
+          <pre><code>cd /Users/jeremymcvay/dev/bestbrowser-native
+./build.sh</code></pre>
+        </article>
+        <article class="panel">
+          <h2>Database reset</h2>
+          <p>If local persistence gets into a bad state during testing:</p>
+          <pre><code>rm -f ~/Library/Application\ Support/com.bestbrowser/bestbrowser.db</code></pre>
+        </article>
+        <article class="panel">
+          <h2>AI unavailable</h2>
+          <p>BestBrowser now uses Apple’s on-device Foundation Models path rather than external providers. If AI features are unavailable, confirm Apple Intelligence is supported, enabled, and finished preparing on the current Mac.</p>
+        </article>
+        <article class="panel">
+          <h2>Where to go deeper</h2>
+          <p>The GitHub wiki covers product surfaces, development workflow, architecture, and troubleshooting in more depth than this support page.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
