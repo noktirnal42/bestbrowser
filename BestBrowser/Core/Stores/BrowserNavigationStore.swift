@@ -49,8 +49,13 @@ final class BrowserNavigationStore {
     }
 
     func selectTab(_ tabId: UUID?) {
-        guard let tabId,
-              let tab = tabs.first(where: { $0.id == tabId }) else { return }
+        guard let tabId else {
+            activeTabId = nil
+            currentURL = ""
+            return
+        }
+
+        guard let tab = tabs.first(where: { $0.id == tabId }) else { return }
         activeTabId = tabId
         currentURL = tab.url
     }
@@ -273,6 +278,10 @@ final class BrowserNavigationStore {
 
     func tabs(in groupId: UUID) -> [BrowserTab] {
         tabs.filter { $0.groupId == groupId }
+    }
+
+    func tab(for tabId: UUID) -> BrowserTab? {
+        tabs.first(where: { $0.id == tabId })
     }
 
     var ungroupedTabs: [BrowserTab] {

@@ -2,8 +2,8 @@
 
 ![BestBrowser Hero](BestBrowser/BrandingAssets/brandmark-hero.png)
 
-[![Version](https://img.shields.io/badge/version-0.3.0-CB8C58?style=for-the-badge)](VERSION)
-[![Platform](https://img.shields.io/badge/platform-macOS%2015%2B-2B6F73?style=for-the-badge)](docs/DEVELOPMENT.md)
+[![Version](https://img.shields.io/badge/version-0.3.1-CB8C58?style=for-the-badge)](VERSION)
+[![Platform](https://img.shields.io/badge/platform-macOS%2026%2B-2B6F73?style=for-the-badge)](docs/DEVELOPMENT.md)
 [![Swift](https://img.shields.io/badge/swift-6-F29D38?style=for-the-badge)](Package.swift)
 [![Status](https://img.shields.io/badge/status-active%20rebuild-E6D1B0?style=for-the-badge)](V3_PLAN.md)
 
@@ -120,7 +120,7 @@ swift build
 
 ```bash
 cd /Users/jeremymcvay/dev/bestbrowser-native
-swift test
+./test.sh
 ```
 
 ### Package the App and DMG
@@ -128,8 +128,17 @@ swift test
 ```bash
 cd /Users/jeremymcvay/dev/bestbrowser-native
 ./build.sh
-open BestBrowser.app
+open /Users/jeremymcvay/dev/bestbrowser-native/BestBrowser.app
 ```
+
+### Requirements
+
+- macOS 26+
+- Xcode 26.4.1 or newer
+- Swift 6.3+
+- Apple Intelligence enabled on a supported Mac for on-device AI features
+
+`./test.sh` uses an explicit all-tests filter to avoid noisy `CoreData`/`NSXPCConnection` runner output currently emitted by plain `swift test` on this toolchain.
 
 ## Repository Layout
 
@@ -169,6 +178,8 @@ docs/
 - [CHANGELOG.md](CHANGELOG.md): release-oriented project history
 - [V3_PLAN.md](V3_PLAN.md): current feature roadmap
 - [VNEXT_REBUILD_PLAN.md](VNEXT_REBUILD_PLAN.md): rebuild/refactor direction
+
+Historical implementation snapshots like `PHASE1_COMPLETE.md`, `PHASE2_COMPLETE.md`, `IMPLEMENTATION_SUMMARY.md`, and `WORK_COMPLETE.md` remain in the repo for reference, but they are not the current product source of truth.
 
 ## Current Status
 

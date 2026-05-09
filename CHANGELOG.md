@@ -2,6 +2,21 @@
 
 All notable project changes should be tracked here in a release-oriented format.
 
+## 0.3.1
+
+### Improved
+
+- Browser feature files were broken into smaller scene, support, toolbar, split-view, and WebKit bridge components
+- Browser state and authentication flow cleanup reduced stale selection behavior and removed deprecated auth handling
+- Storage schema/bootstrap logic was pulled out of the main storage manager for a slimmer persistence layer
+- Build, test, and packaging docs were aligned around the current Swift 6.3 and macOS 26 workflow
+
+### Packaging
+
+- `./test.sh` is now the recommended clean verification path before packaging
+- `./build.sh` produces the release DMG for the current `VERSION` value
+- historical phase and implementation notes are now explicitly treated as archival docs
+
 ## 0.3.0
 
 ### Added

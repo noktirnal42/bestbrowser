@@ -31,7 +31,10 @@ This layer owns the high-level application structure:
 
 - `BestBrowser/Features/Browser/BrowserShellView.swift`
 - `BestBrowser/Features/Browser/BrowserMainColumnView.swift`
-- `BestBrowser/Features/Browser/BrowserChromeComponents.swift`
+- `BestBrowser/Features/Browser/BrowserShellWorkspaceLayout.swift`
+- `BestBrowser/Features/Browser/BrowserMainColumnSupportViews.swift`
+- `BestBrowser/Features/Browser/BrowserToolbarView.swift`
+- `BestBrowser/Features/Browser/BrowserVerticalTabRailView.swift`
 
 This is the primary browsing experience:
 
@@ -89,8 +92,11 @@ The service layer now carries logic that previously lived inline in the browser 
 ### Main Browser Web Views
 
 - `BestBrowser/Features/Browser/BrowserWebView.swift`
+- `BestBrowser/Features/Browser/BrowserWebViewDefaults.swift`
+- `BestBrowser/Features/Browser/BrowserWebViewFactory.swift`
+- `BestBrowser/Features/Browser/BrowserWebViewCoordinators.swift`
 
-This file owns:
+These files own:
 
 - `WKWebView` construction
 - compatibility user agent

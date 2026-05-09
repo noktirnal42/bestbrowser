@@ -13,14 +13,14 @@ BestBrowser is still moving quickly, so the most helpful contributions are the o
 - Make focused, coherent changes
 - Prefer extending the newer store/service/feature structure over reviving monolithic patterns
 - Preserve the existing brand palette and UI direction
-- Test behavior changes with `swift build`, and `swift test` when appropriate
+- Test behavior changes with `swift build`, and `./test.sh` when appropriate
 
 ## Local Workflow
 
 ```bash
 cd /Users/jeremymcvay/dev/bestbrowser-native
 swift build
-swift test
+./test.sh
 ./build.sh
 ```
 

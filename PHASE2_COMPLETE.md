@@ -1,3 +1,7 @@
+# Historical Note
+
+This phase summary is archival and no longer represents the current browser and product structure. Use the current repo docs for up-to-date guidance.
+
 # ✅ Phase 2 Complete: UI & Polish
 
 **Status**: Implementation Complete (Ready for Integration Testing)  

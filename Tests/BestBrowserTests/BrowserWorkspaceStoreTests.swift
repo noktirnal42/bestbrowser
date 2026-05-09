@@ -46,4 +46,20 @@ final class BrowserWorkspaceStoreTests: XCTestCase {
         store.showBrowser()
         XCTAssertEqual(store.surfaceMode, .browser)
     }
+
+    func testSelectTabAllowsClearingAndIgnoresUnknownIDs() {
+        let store = BrowserWorkspaceStore()
+        let first = BrowserTab(id: UUID(), url: "https://example.com", title: "Example", favicon: nil, groupId: nil)
+        let second = BrowserTab(id: UUID(), url: "https://openai.com", title: "OpenAI", favicon: nil, groupId: nil)
+
+        store.bootstrap(with: [first, second])
+        store.selectTab(second.id)
+        XCTAssertEqual(store.selectedTabID, second.id)
+
+        store.selectTab(UUID())
+        XCTAssertEqual(store.selectedTabID, second.id)
+
+        store.selectTab(nil)
+        XCTAssertNil(store.selectedTabID)
+    }
 }

@@ -2,9 +2,9 @@
 
 ## Requirements
 
-- macOS 15+
-- Xcode 16.4+
-- Swift 6 toolchain
+- macOS 26+
+- Xcode 26.4.1+
+- Swift 6.3+ toolchain
 
 ## Build
 
@@ -19,7 +19,7 @@ swift build
 
 ```bash
 cd /Users/jeremymcvay/dev/bestbrowser-native
-swift test
+./test.sh
 ```
 
 ### Package the App and DMG
@@ -35,6 +35,23 @@ That script:
 - performs a release build
 - creates `BestBrowser.app`
 - creates `releases/BestBrowser-v<version>.dmg`
+
+### Release Verification
+
+Before cutting a release, run:
+
+```bash
+cd /Users/jeremymcvay/dev/bestbrowser-native
+swift build
+./test.sh
+./build.sh
+```
+
+Then verify:
+
+- `BestBrowser.app` launches successfully
+- `releases/BestBrowser-v<version>.dmg` exists and mounts
+- the docs and changelog match the shipped behavior
 
 ## Versioning
 
@@ -71,7 +88,7 @@ These are packaging/runtime outputs, not source.
 
 1. Make focused source or documentation changes.
 2. Run `swift build`.
-3. Run `swift test` when the change affects behavior or state flow.
+3. Run `./test.sh` when the change affects behavior or state flow.
 4. Run `./build.sh` when validating the packaged app or DMG.
 5. Launch the app bundle for real-world behavior checks:
 
@@ -107,14 +124,14 @@ Useful source files when preparing release notes:
 - `README.md`
 - `V3_PLAN.md`
 - `VNEXT_REBUILD_PLAN.md`
-- `IMPLEMENTATION_SUMMARY.md`
-- `WORK_COMPLETE.md`
+- `CHANGELOG.md`
+
+Historical milestone notes like `IMPLEMENTATION_SUMMARY.md`, `PHASE1_COMPLETE.md`, `PHASE2_COMPLETE.md`, and `WORK_COMPLETE.md` should only be used as archival context, not as current release-source material.
 
 ## Suggested Next Documentation Areas
 
 If the project keeps growing, the next docs worth adding are:
 
-- a dedicated `CHANGELOG.md`
 - extension manifest reference
 - browser command palette reference
 - release checklist for DMG packaging and test passes

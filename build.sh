@@ -3,6 +3,7 @@ set -e
 
 APP_NAME="BestBrowser"
 APP_VERSION="$(cat VERSION)"
+MIN_MACOS_VERSION="26.0"
 APP_BUNDLE="$APP_NAME.app"
 DMG_NAME="$APP_NAME-v$APP_VERSION.dmg"
 RELEASES_DIR="releases"
@@ -79,7 +80,7 @@ cat > "$APP_BUNDLE/Contents/Info.plist" << PLIST
         <true/>
     </dict>
     <key>LSMinimumSystemVersion</key>
-    <string>15.0</string>
+    <string>$MIN_MACOS_VERSION</string>
     <key>NSHighResolutionCapable</key>
     <true/>
     <key>CFBundleDocumentTypes</key>

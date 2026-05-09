@@ -81,12 +81,7 @@ class BrowserViewModel: ObservableObject {
 
     func newTab() {
         navigationStore.openNewTab(newTabURL: Self.newTabURL)
-        syncNavigationState()
-        if let activeTabId {
-            updateNavigationState(for: activeTabId)
-        }
-        NotificationCenter.default.post(name: .refreshWorkspaceSession, object: nil)
-        persistSession()
+        commitNavigationChange(refreshActiveNavigation: true)
     }
 
     func closeTab(id: UUID) {
@@ -175,11 +170,7 @@ class BrowserViewModel: ObservableObject {
         sessionRestoreService.saveClosedTabs(closedTabs)
 
         navigationStore.reopenTab(from: record)
-        syncNavigationState()
-        if let activeTabId {
-            updateNavigationState(for: activeTabId)
-        }
-        persistSession()
+        commitNavigationChange(refreshActiveNavigation: true, refreshWorkspaceSession: false)
     }
 
     func restoreClosedSession(_ record: ClosedSessionRecord) {
@@ -325,11 +316,12 @@ class BrowserViewModel: ObservableObject {
             navigationStore.updateURL(newUrl, for: resolvedTabId)
             syncNavigationState()
 
+            let historyTitle = navigationStore.tab(for: resolvedTabId)?.title ?? newUrl
+
             Task {
-                try? await storage.addHistory(newUrl, title: currentTab?.title ?? newUrl)
+                try? await storage.addHistory(newUrl, title: historyTitle)
             }
-            NotificationCenter.default.post(name: .refreshWorkspaceSession, object: nil)
-            persistSession()
+            persistSessionAndRefreshWorkspace()
         }
     }
 
@@ -338,18 +330,14 @@ class BrowserViewModel: ObservableObject {
         if let resolvedTabId,
            tabs.contains(where: { $0.id == resolvedTabId }) {
             navigationStore.updateTitle(title, for: resolvedTabId)
-            syncNavigationState()
-            NotificationCenter.default.post(name: .refreshWorkspaceSession, object: nil)
-            persistSession()
+            persistSessionAndRefreshWorkspace(syncState: true)
         }
     }
 
     func updateFavicon(_ favicon: String?, for tabId: UUID) {
         guard tabs.contains(where: { $0.id == tabId }) else { return }
         navigationStore.updateFavicon(favicon, for: tabId)
-        syncNavigationState()
-        NotificationCenter.default.post(name: .refreshWorkspaceSession, object: nil)
-        persistSession()
+        persistSessionAndRefreshWorkspace(syncState: true)
     }
 
     func sessionSnapshots() -> [SessionTabSnapshot] {
@@ -362,20 +350,17 @@ class BrowserViewModel: ObservableObject {
         syncNavigationState()
         canGoBack = false
         canGoForward = false
-        NotificationCenter.default.post(name: .refreshWorkspaceSession, object: nil)
-        persistSession()
+        persistSessionAndRefreshWorkspace()
     }
 
     func toggleSplitView() {
         navigationStore.toggleSplitView(newTabURL: Self.newTabURL)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func setSplitTab(_ tabId: UUID?) {
         navigationStore.setSplitTab(tabId)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func availableSplitCandidates() -> [BrowserTab] {
@@ -384,50 +369,42 @@ class BrowserViewModel: ObservableObject {
 
     func toggleVerticalTabs() {
         navigationStore.toggleVerticalTabs()
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func createGroupFromCurrentTab() {
         navigationStore.createGroupFromCurrentTab()
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func assignTab(_ tabId: UUID, to groupId: UUID?) {
         navigationStore.assignTab(tabId, to: groupId)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func updateGroup(_ groupId: UUID, name: String, colorKey: String) {
         navigationStore.updateGroup(groupId, name: name, colorKey: colorKey)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func moveTab(_ draggedTabId: UUID, toGroup targetGroupId: UUID?, before targetTabId: UUID? = nil) {
         navigationStore.moveTab(draggedTabId, toGroup: targetGroupId, before: targetTabId)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func reorderGroup(_ draggedGroupId: UUID, before targetGroupId: UUID) {
         navigationStore.reorderGroup(draggedGroupId, before: targetGroupId)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func removeGroup(_ groupId: UUID) {
         navigationStore.removeGroup(groupId)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func toggleGroupCollapsed(_ groupId: UUID) {
         navigationStore.toggleGroupCollapsed(groupId)
-        syncNavigationState()
-        persistSession()
+        commitNavigationChange(refreshWorkspaceSession: false)
     }
 
     func group(for tabId: UUID) -> TabGroup? {
@@ -488,6 +465,32 @@ class BrowserViewModel: ObservableObject {
         webViewInstances = [:]
         navigationStore.restore(from: snapshot, newTabURL: Self.newTabURL)
         syncNavigationState()
+    }
+
+    private func commitNavigationChange(
+        refreshActiveNavigation: Bool = false,
+        refreshWorkspaceSession: Bool = true
+    ) {
+        persistSessionAndRefreshWorkspace(syncState: true, refreshWorkspaceSession: refreshWorkspaceSession)
+
+        if refreshActiveNavigation, let activeTabId {
+            updateNavigationState(for: activeTabId)
+        }
+    }
+
+    private func persistSessionAndRefreshWorkspace(
+        syncState: Bool = false,
+        refreshWorkspaceSession: Bool = true
+    ) {
+        if syncState {
+            syncNavigationState()
+        }
+
+        if refreshWorkspaceSession {
+            NotificationCenter.default.post(name: .refreshWorkspaceSession, object: nil)
+        }
+
+        persistSession()
     }
 
     private func persistSession() {

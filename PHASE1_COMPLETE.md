@@ -1,3 +1,7 @@
+# Historical Note
+
+This phase summary is archival and no longer describes the current product architecture or AI setup. Use the current repo docs for up-to-date guidance.
+
 # ✅ Phase 1 Complete: Privacy & Storage Layer
 
 **Status**: Implementation Complete (Ready for Integration Testing)

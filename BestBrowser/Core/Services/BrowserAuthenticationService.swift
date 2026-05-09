@@ -79,17 +79,7 @@ final class BrowserAuthenticationService: NSObject, ObservableObject {
     func completeAuthenticationIfNeeded(with url: URL, isMainFrame: Bool) -> Bool {
         guard isMainFrame, let request = currentAuthenticationRequest else { return false }
 
-        if #available(macOS 14.4, *),
-           let callback = request.callback,
-           callback.matchesURL(url) {
-            request.complete(withCallbackURL: url)
-            currentAuthenticationRequest = nil
-            ssoStatus = "Browser sign-in handoff completed."
-            return true
-        }
-
-        if let callbackURLScheme = request.callbackURLScheme,
-           url.scheme == callbackURLScheme {
+        if request.callback?.matchesURL(url) == true {
             request.complete(withCallbackURL: url)
             currentAuthenticationRequest = nil
             ssoStatus = "Browser sign-in handoff completed."

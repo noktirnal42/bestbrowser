@@ -1,3 +1,7 @@
+# Historical Note
+
+This file reflects an older milestone snapshot and is retained for archival reference only. Use `README.md`, `docs/ARCHITECTURE.md`, `docs/DEVELOPMENT.md`, `V3_PLAN.md`, and `VNEXT_REBUILD_PLAN.md` for the current product and workflow state.
+
 # ✅ WORK COMPLETE - BestBrowser Swift Native Migration
 
 **Project**: Migrate BestBrowser from Electron to Native Swift  

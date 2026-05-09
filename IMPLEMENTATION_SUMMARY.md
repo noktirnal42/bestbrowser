@@ -1,3 +1,7 @@
+# Historical Note
+
+This file describes an older implementation phase and is kept only as archival context. Use `README.md`, `docs/ARCHITECTURE.md`, `docs/DEVELOPMENT.md`, `V3_PLAN.md`, and `VNEXT_REBUILD_PLAN.md` as the current source of truth.
+
 # 🎯 BestBrowser Swift Native - Implementation Summary
 
 **Project**: Privacy-First Native macOS Browser  

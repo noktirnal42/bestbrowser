@@ -16,8 +16,6 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/groue/GRDB.swift.git", from: "6.28.0"),
-        .package(url: "https://github.com/Quick/Quick.git", from: "7.4.0"),
-        .package(url: "https://github.com/Quick/Nimble.git", from: "13.2.0"),
     ],
     targets: [
         .executableTarget(

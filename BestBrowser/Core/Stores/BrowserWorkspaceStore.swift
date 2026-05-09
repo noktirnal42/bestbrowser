@@ -44,6 +44,12 @@ final class BrowserWorkspaceStore {
     }
 
     func selectTab(_ id: UUID?) {
+        guard let id else {
+            selectedTabID = nil
+            return
+        }
+
+        guard tabs.contains(where: { $0.id == id }) else { return }
         selectedTabID = id
     }
 
